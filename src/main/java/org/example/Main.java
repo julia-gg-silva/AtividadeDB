@@ -6,10 +6,10 @@ import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
-    Scanner sc = new Scanner(System.in);
+     private static final Scanner sc = new Scanner(System.in);
 
 
-    public void menu() {
+    public static void menu() {
         System.out.println("-- Cadastro de Itens --");
         System.out.println("1. Cadastro Alunos");
         System.out.printf("2 . Cadastro de Produtos");
@@ -32,22 +32,26 @@ public class Main {
 
     }
 
-    private void cadastroAlunos() {
+    private static void cadastroAlunos() {
 
+        AlunoDAO alunoDAO = new AlunoDAO();
+
+        System.out.println("Digite o nome do aluno: ");
+        String nome = sc.nextLine();
+
+        System.out.println("Digite a matrícula do aluno: ");
+        int matricula = sc.nextInt();
+
+        System.out.println("Digite o curso do aluno: ");
+        String curso = sc.nextLine();
+
+        Aluno aluno = new Aluno(nome, matricula, curso);
+
+        alunoDAO.inserir(aluno);
 
     }
 
     public static void main(String[] args) {
-        UsuarioDAO userDao = new UsuarioDAO();
-
-        System.out.println("Digite o nome do usuario: ");
-        String nome = sc.nextLine();
-
-        System.out.println("Digite o email do usuario: ");
-        String email = sc.nextLine();
-
-        Usuario user = new Usuario(nome, email);
-
-        userDao.inserir(user);
+        menu();
     }
 }
