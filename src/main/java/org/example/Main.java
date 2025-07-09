@@ -37,6 +37,69 @@ public class Main {
     }
 
     private static void menuExcluir() {
+        int opcao;
+        do {
+            System.out.println("-- Menu Excluir --");
+            System.out.println("1. Excluir Alunos");
+            System.out.println("2. Excluir Produtos");
+            System.out.println("3. Excluir Pedidos");
+            System.out.println("4. Excluir Livros");
+            System.out.println("5. Excluir Funcionarios");
+            System.out.println("0. Voltar");
+            System.out.println("Informe o que deseja excluir __");
+            opcao = sc.nextInt();
+            switch (opcao) {
+                case 0:
+                    return;
+                case 1:
+                    sc.nextLine();
+                    AlunoDAO alunoDAO = new AlunoDAO();
+                    System.out.println("--- Excluir Alunos ---");
+                    System.out.println("Digite o nome do aluno que deseja excluir: ");
+                    String nomeAluno = sc.next();
+
+                    alunoDAO.deletarAluno(nomeAluno);
+                    break;
+                case 2:
+                    sc.nextLine();
+                    ProdutoDAO produtoDAO = new ProdutoDAO();
+                    System.out.println("--- Excluir Produtos ---");
+                    System.out.println("Digite o nome do produto que deseja excluir: ");
+                    String nomeProduto = sc.nextLine();
+
+                    produtoDAO.deletarProduto(nomeProduto);
+                    break;
+                case 3:
+                    sc.nextLine();
+                    PedidoDAO pedidoDAO = new PedidoDAO();
+                    System.out.println("--- Excluir Pedidos ---");
+                    System.out.println("Digite o nome do cliente que realizou o pedido: ");
+                    String nomeClie = sc.nextLine();
+
+                    pedidoDAO.deletarPedido(nomeClie);
+                    break;
+                case 4:
+                    sc.nextLine();
+                    LivroDAO  livroDAO = new LivroDAO();
+                    System.out.println("--- Excluir Livros ---");
+                    System.out.println("Digite o titulo do livro que deseja excluir: ");
+                    String titulo = sc.nextLine();
+
+                    livroDAO.deletarLivro(titulo);
+                    break;
+                case 5:
+                    sc.nextLine();
+                   FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                    System.out.println("--- Excluir Funcionarios ---");
+                    System.out.println("Digite o nome do funcionario que deseja excluir: ");
+                    String nome = sc.nextLine();
+
+                    funcionarioDAO.deletarFuncionario(nome);
+                    break;
+                default:
+                    System.out.println("Valor inválido, tentente novamente!");
+            }
+        } while (opcao != 0);
     }
 
 
@@ -58,18 +121,209 @@ public class Main {
                 case 1:
                     atualizarAluno();
                     break;
-//                case 2: atualizarProduto();
-//                    break;
-//                case 3: atualizarPedidos();
-//                    break;
-//                case 4:  atualizarLivros();
-//                    break;
-//                case 5: atualizarFuncinarios();
-//                    break;
+                case 2:
+                    atualizarProduto();
+                    break;
+                case 3:
+                    atualizarPedidos();
+                    break;
+                case 4:
+                    atualizarLivros();
+                    break;
+                case 5:
+                    atualizarFuncinarios();
+                    break;
                 default:
                     System.out.println("Valor inválido, tentente novamente!");
             }
         } while (opcao != 0);
+    }
+
+    private static void atualizarFuncinarios() {
+        int opcao;
+        FuncionarioDAO funcionarioDao = new FuncionarioDAO();
+
+        sc.nextLine();
+
+        System.out.println("--- Atualizar Funcionarios ---");
+        System.out.println("Informe o nome do Funcionario que deseja atualizar: ");
+        String nome = sc.nextLine();
+
+        System.out.println("Escolha o campo que deseja atualizar: ");
+        System.out.println("1. Nome");
+        System.out.println("2. Cargo");
+        System.out.println("3. Salário");
+        System.out.println("0. Voltar");
+        opcao = sc.nextInt();
+
+        switch (opcao) {
+            case 0:
+                return;
+            case 1:
+                sc.nextLine();
+                System.out.println("--- Atualizar Nome ---");
+                System.out.println("Informe o novo Nome do funcionario: ");
+                String novoNome = sc.nextLine();
+
+                funcionarioDao.atualizarNome(nome, novoNome);
+                break;
+            case 2:
+                sc.nextLine();
+                System.out.println("--- Atualizar Cargo ---");
+                System.out.println("Informe o novo cargo: ");
+                String novoCargo = sc.nextLine();
+
+                funcionarioDao.atualizarCargo(nome, novoCargo);
+                break;
+            case 3:
+                sc.nextLine();
+                System.out.println("--- Atualizar Salário ---");
+                System.out.println("Informe o novo Salario: ");
+                Double salario = sc.nextDouble();
+
+                funcionarioDao.atualizarSalario(nome, salario);
+                break;
+        }
+
+    }
+
+    private static void atualizarLivros() {
+        int opcao;
+        LivroDAO livroDao = new LivroDAO();
+
+        sc.nextLine();
+
+        System.out.println("--- Atualizar Livros ---");
+        System.out.println("Informe o titulo do livro que deseja atualizar: ");
+        String tituloLivro = sc.nextLine();
+
+        System.out.println("Escolha o campo que deseja atualizar: ");
+        System.out.println("1. Titulo");
+        System.out.println("2. Autor");
+        System.out.println("3. Ano de publicação");
+        System.out.println("0. Voltar");
+        opcao = sc.nextInt();
+
+        switch (opcao) {
+            case 0:
+                return;
+            case 1:
+                sc.nextLine();
+                System.out.println("--- Atualizar titulo ---");
+                System.out.println("Informe o novo Titulo do livro: ");
+                String novoTitulo = sc.nextLine();
+
+                livroDao.atualizarTitulo(tituloLivro, novoTitulo);
+                break;
+            case 2:
+                sc.nextLine();
+                System.out.println("--- Atualizar Autor ---");
+                System.out.println("Informe o novo Autor do livro: ");
+                String novoAutor = sc.nextLine();
+
+                livroDao.atualizarAutor(tituloLivro, novoAutor);
+                break;
+            case 3:
+                sc.nextLine();
+                System.out.println("--- Atualizar Ano Publicação ---");
+                System.out.println("Informe o novo Ano de publicação do livro: ");
+                String novoAno = sc.nextLine();
+
+                livroDao.atualizarAno(tituloLivro, novoAno);
+                break;
+        }
+
+
+    }
+
+    private static void atualizarPedidos() {
+        int opcao;
+        PedidoDAO pedidoDAO = new PedidoDAO();
+
+        sc.nextLine();
+        System.out.println("--- Atualizar Pedido ---");
+        System.out.println("Informe o nome do cliente que realizou o pedido: ");
+        String nomeCli = sc.nextLine();
+
+        System.out.println("Escolha o campo que deseja atualizar: ");
+        System.out.println("1. Cliente");
+        System.out.println("2. Total");
+        System.out.println("0. VOLTAR");
+
+        opcao = sc.nextInt();
+        switch (opcao) {
+            case 0:
+                return;
+            case 1:
+                sc.nextLine();
+                System.out.println("--- Atualizar Cliente ---");
+                System.out.println("Digite o novo nome do cliente: ");
+                String novoNome = sc.nextLine();
+
+                pedidoDAO.atualizarNome(nomeCli, novoNome);
+                break;
+            case 2:
+                sc.nextLine();
+                System.out.println("--- Atualizar Total ---");
+                System.out.println("Digite o novo total: ");
+                double novoTotal = sc.nextDouble();
+
+                pedidoDAO.atualizarTotal(nomeCli, novoTotal);
+                break;
+            default:
+                System.out.println("Valor inválido, tentente novamente!");
+                break;
+        }
+    }
+
+    private static void atualizarProduto() {
+        int opcao;
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
+        sc.nextLine();
+        System.out.println("--- Atualizar Produto ---");
+        System.out.println("Informe o nome do produto que deseja atualizar: ");
+        String nome = sc.nextLine();
+
+        System.out.println("Escolha o campo que deseja atualizar: ");
+        System.out.println("1. Nome");
+        System.out.println("2. Preço");
+        System.out.println("3. Quantidade");
+        System.out.println("0. VOLTAR");
+
+        opcao = sc.nextInt();
+        switch (opcao) {
+            case 0:
+                return;
+            case 1:
+                sc.nextLine();
+                System.out.println("--- Atualizar nome ---");
+                System.out.println("Digite o novo nome: ");
+                String novoNome = sc.nextLine();
+
+                produtoDAO.atualizarNome(nome, novoNome);
+                break;
+            case 2:
+                sc.nextLine();
+                System.out.println("--- Atualizar preço ---");
+                System.out.println("Digite o novo preço: ");
+                double novoPreco = sc.nextDouble();
+
+                produtoDAO.atualizarPreco(nome, novoPreco);
+                break;
+            case 3:
+                sc.nextLine();
+                System.out.println("--- Atualizar quantidade ---");
+                System.out.println("Digite a nova quantidade: ");
+                int novaQuantidade = sc.nextInt();
+
+                produtoDAO.atualizarQuantidade(nome, novaQuantidade);
+                break;
+            default:
+                System.out.println("Valor inválido, tentente novamente!");
+                break;
+        }
+
     }
 
     private static void atualizarAluno() {

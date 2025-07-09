@@ -77,4 +77,21 @@ public class AlunoDAO {
             e.printStackTrace();
         }
     }
+
+    public void deletarAluno(String nome){
+        String sql = "DELETE FROM alunos WHERE nome = ?";
+
+        try(Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1, nome);
+
+            stmt.executeUpdate();
+
+            System.out.println("Aluno removido com sucesso!");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
