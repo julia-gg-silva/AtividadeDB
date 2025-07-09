@@ -16,11 +16,65 @@ public class AlunoDAO {
             stmt.setInt(2, aluno.getMatricula());
             stmt.setString(3, aluno.getCurso());
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        {
+            stmt.executeUpdate();
 
+            System.out.println("Aluno inserido com sucesso!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void atualizarNome(String nome, String novoNome){
+        String sql = "UPDATE alunos SET nome = ? WHERE nome = ?";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1, novoNome);
+            stmt.setString(2, nome);
+
+            stmt.executeUpdate();
+
+            System.out.println("Nome atualizado com sucesso!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void atualizarMatricula(String nome, int novaMatricula){
+        String sql = "UPDATE alunos SET matricula = ? WHERE nome = ?";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setInt(1, novaMatricula);
+            stmt.setString(2, nome);
+
+            stmt.executeUpdate();
+            System.out.println("Matricula atualizada com sucesso!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void atualizarCurso(String nome, String novoCurso){
+
+        String sql = "UPDATE alunos SET curso = ? WHERE nome = ?";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1, novoCurso);
+            stmt.setString(2, nome);
+
+            stmt.executeUpdate();
+            System.out.println("Curso atualizada com sucesso!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
