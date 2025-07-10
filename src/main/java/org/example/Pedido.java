@@ -3,7 +3,7 @@ package org.example;
 import java.time.LocalDate;
 
 public class Pedido {
-
+    private int id;
     private String nomeCliente;
     private LocalDate dataPedido;
     private double total;
@@ -12,6 +12,10 @@ public class Pedido {
         this.nomeCliente = nomeCliente;
         this.dataPedido = dataPedido;
         this.total = total;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNomeCliente() {

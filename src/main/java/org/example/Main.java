@@ -4,6 +4,7 @@ import com.sun.security.jgss.GSSUtil;
 
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +17,8 @@ public class Main {
             System.out.println("1. Cadastrar um item");
             System.out.println("2. Atualizar um item");
             System.out.println("3. Excluir um item");
+            System.out.println("4. Listar uma tabela");
+            System.out.println("5. Buscar por ID");
             System.out.println("0. Sair");
             System.out.println("Opção desejada __");
             opcao = sc.nextInt();
@@ -29,11 +32,107 @@ public class Main {
                 case 3:
                     menuExcluir();
                     break;
+                case 4:
+                    listarTabelas();
+                    break;
+                case 5:
+                    buscarPorID();
+                    break;
                 case 0:
                     System.out.println("Sistema encerrado");
                     System.exit(0);
             }
         } while (opcao != 0);
+    }
+
+    private static void buscarPorID() {
+        int opcao;
+        do{
+            System.out.println("--- Bucar por ID ---");
+            System.out.println("1. Buscar Alunos");
+            System.out.println("2. Buscar Produtos");
+            System.out.println("3. Buscar Pedidos");
+            System.out.println("4. Buscar Livros");
+            System.out.println("5. Buscar Funcionarios");
+            System.out.println("0. Voltar");
+            System.out.println("Informe o que deseja listar __");
+            opcao = sc.nextInt();
+            switch (opcao) {
+                case 1:
+
+            }
+        }while (opcao != 0);
+
+    }
+
+    private static void listarTabelas() {
+        int opcao;
+        do {
+            System.out.println("--- Menu Listar ---");
+            System.out.println("1. Listar Alunos");
+            System.out.println("2. Listar Produtos");
+            System.out.println("3. Listar Pedidos");
+            System.out.println("4. Listar Livros");
+            System.out.println("5. Listar Funcionarios");
+            System.out.println("0. Voltar");
+            System.out.println("Informe o que deseja listar __");
+            opcao = sc.nextInt();
+            switch (opcao) {
+                case 0:
+                    return;
+                case 1:
+                    listarAlunos();
+                    break;
+                case 2:
+                    listarProdutos();
+                    break;
+                case 3:
+                    listarPedidos();
+                    break;
+                case 4: listarLivros();
+
+            }
+        }while (opcao != 0);
+    }
+
+    public static void listarLivros() {
+
+    }
+
+    public static void listarPedidos() {
+        PedidoDAO pedidosDAO = new PedidoDAO();
+
+        List<Pedido> pedidos = pedidosDAO.listarPedidos();
+        for(Pedido pedido : pedidos) {
+            System.out.println("ID: " +pedido.getId());
+            System.out.println("Cliente: " + pedido.getNomeCliente());
+            System.out.println("Data do pedido: " + pedido.getDataPedido());
+            System.out.println("Total: " + pedido.getTotal()+ "\n\n");
+        }
+    }
+
+    public static void listarProdutos() {
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
+        List<Produto> produtos = produtoDAO.listarProdutos();
+        for(Produto produto : produtos) {
+            System.out.println("ID: " +produto.getId());
+            System.out.println("Nome: " + produto.getNome());
+            System.out.println("Preco: " + produto.getPreco());
+            System.out.println("Quantidade: " + produto.getQuantidade()+ "\n\n");
+        }
+    }
+
+    public static void listarAlunos() {
+        AlunoDAO alunoDAO = new AlunoDAO();
+
+        List<Aluno> alunos = AlunoDAO.listarAlunos();
+        for(Aluno aluno : alunos){
+            System.out.println("ID: " +aluno.getId());
+            System.out.println("Nome: "+ aluno.getNome());
+            System.out.println("Matricula: "+ aluno.getMatricula());
+            System.out.println("Curso: "+ aluno.getCurso()+ "\n\n");
+        }
     }
 
     private static void menuExcluir() {

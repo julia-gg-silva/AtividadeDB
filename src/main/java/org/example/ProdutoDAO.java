@@ -1,8 +1,8 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProdutoDAO {
 
@@ -95,6 +95,33 @@ public class ProdutoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<Produto> listarProdutos(){
+
+        List<Produto> produtos = new ArrayList();
+
+        String sql = "SELECT nome,preco,quantidade FROM produtos";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+
+                String nome = rs.getString("nome");
+                double preco = rs.getDouble("preco");
+                int quantidade = rs.getInt("quantidade");
+
+                Produto produto = new Produto(nome, preco, quantidade);
+                produtos.add(produto);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produtos;
     }
 
 

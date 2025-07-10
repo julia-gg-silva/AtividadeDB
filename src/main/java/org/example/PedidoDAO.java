@@ -1,9 +1,10 @@
 package org.example;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.security.auth.login.AppConfigurationEntry;
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PedidoDAO {
 
@@ -77,5 +78,31 @@ public class PedidoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Pedido> listarPedidos(){
+        List<Pedido> pedidos = new ArrayList<>();
+
+        String sql = "SELECT cliente,data_pedido,total FROM pedidos";
+
+        try(Connection conn = Conexao.conectar();
+        PreparedStatement stmt  = conn.prepareStatement(sql)){
+
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+
+                String cliente = rs.getString("cliente");
+                LocalDate dataPedido = rs.getDate("data_pedido").toLocalDate();
+                double total = rs.getDouble("total ");
+
+                Pedido pedido = new Pedido(cliente, dataPedido, total);
+                pedidos.add(pedido);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return pedidos;
     }
 }

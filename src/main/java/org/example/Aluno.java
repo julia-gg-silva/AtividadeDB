@@ -1,6 +1,7 @@
 package org.example;
 
 public class Aluno {
+    private int id;
     private String nome;
     private int matricula;
     private String curso;
@@ -9,6 +10,10 @@ public class Aluno {
         this.nome = nome;
         this.matricula = matricula;
         this.curso = curso;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNome(){
@@ -22,4 +27,5 @@ public class Aluno {
     public String getCurso(){
         return curso;
     }
+
 }
